@@ -1,11 +1,17 @@
+require './lib/bike.rb'
+
 class DockingStation
-  attr_reader :bike
+  attr_reader :bikes
     def initialize
-      @bike = Bike.new
+        @bikes = []
+        3.times { @bikes << Bike.new }
     end
+
     def release_bike
-        @bike
+        bike = @bikes.pop
+        if bike != nil then bike else raise 'There are no bikes left' end
     end
+
     def return_bike
     end
 end

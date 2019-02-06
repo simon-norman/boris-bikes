@@ -18,8 +18,19 @@ describe DockingStation do
     expect(dockingstation).to respond_to(:return_bike)
   end
 
-  it "responds to bike" do
+  it "can show the bikes in dock" do
     dockingstation = DockingStation.new
-    expect(dockingstation.bike.class).to eq Bike
+    
+    dockingstation.bikes.each do |bike|
+      expect(bike.class).to eq Bike
+    end
+  end
+
+  it "raises exception on release_bike when no more bikes left" do
+    dockingstation = DockingStation.new
+
+    3.times { dockingstation.release_bike }
+    
+    expect { dockingstation.release_bike }.to raise_error
   end
 end
