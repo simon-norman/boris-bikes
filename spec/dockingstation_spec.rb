@@ -2,41 +2,39 @@
 require './lib/dockingstation.rb'
 
 describe DockingStation do
+  before(:each) do
+    @dockingstation = DockingStation.new
+  end
+
   it 'responds to release_bike method' do
-    dockingstation = DockingStation.new
-    expect(dockingstation).to respond_to(:release_bike)
+    expect(@dockingstation).to respond_to(:release_bike)
   end
 
   it 'returns a new bike' do
-    dockingstation = DockingStation.new
-
-    expect(dockingstation.release_bike.working?).to eq(true)
+    expect(@dockingstation.release_bike.working?).to eq(true)
   end
 
   it 'responds to return bike' do
-    dockingstation = DockingStation.new
-    expect(dockingstation).to respond_to(:return_bike)
+    expect(@dockingstation).to respond_to(:return_bike)
   end
 
   it "can show the bikes in dock" do
-    dockingstation = DockingStation.new
-
-    dockingstation.bikes.each do |bike|
+    @dockingstation.bikes.each do |bike|
       expect(bike.class).to eq Bike
     end
   end
 
   it "raises exception on release_bike when no more bikes left" do
-    dockingstation = DockingStation.new
+    20.times { @dockingstation.release_bike }
 
-    3.times { dockingstation.release_bike }
-
-    expect { dockingstation.release_bike }.to raise_error
+    expect { @dockingstation.release_bike }.to raise_error
   end
 
   it "raises exception on return bike and station being full" do
-    dockingstation = DockingStation.new
+    expect { @dockingstation.return_bike(Bike.new) }.to raise_error
+  end
 
-    expect { dockingstation.return_bike(Bike.new) }.to raise_error
+  it "initially contains 20 bikes (on creation)" do
+    expect(@dockingstation.bikes.length).to eq(20)
   end
 end
