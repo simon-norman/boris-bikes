@@ -2,10 +2,11 @@ require './lib/bike.rb'
 
 class DockingStation
   attr_reader :bikes
+  DEFAULT_CAPACITY = 20
+
     def initialize
-        @capacity = 20
         @bikes = []
-        @capacity.times { @bikes << Bike.new }
+        DEFAULT_CAPACITY.times { @bikes << Bike.new }
     end
 
     def release_bike
@@ -19,7 +20,7 @@ class DockingStation
     end
 
     def full?
-      @bikes.count >= @capacity
+      @bikes.count >= DEFAULT_CAPACITY
     end
 
     def empty?

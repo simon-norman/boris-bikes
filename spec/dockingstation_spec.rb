@@ -2,6 +2,10 @@
 require './lib/dockingstation.rb'
 
 describe DockingStation do
+  before(:all) do
+    @bikes_capacity = DockingStation::DEFAULT_CAPACITY
+  end
+
   before(:each) do
     @dockingstation = DockingStation.new
   end
@@ -25,7 +29,7 @@ describe DockingStation do
   end
 
   it "raises exception on release_bike when no more bikes left" do
-    20.times { @dockingstation.release_bike }
+    @bikes_capacity.times { @dockingstation.release_bike }
 
     expect { @dockingstation.release_bike }.to raise_error('No bikes left')
   end
@@ -34,7 +38,7 @@ describe DockingStation do
     expect { @dockingstation.return_bike(Bike.new) }.to raise_error('Docking Station is full')
   end
 
-  it "initially contains 20 bikes (on creation)" do
-    expect(@dockingstation.bikes.length).to eq(20)
+  it "initially contains #{@bikes_capacity} bikes (on creation)" do
+    expect(@dockingstation.bikes.length).to eq(@bikes_capacity)
   end
 end
