@@ -11,3 +11,10 @@ Bike
 
 DockingStation        View bikes
 Bike
+
+As a member of the public,
+So that I am not confused and charged unnecessarily,
+I'd like docking stations not to release bikes when there are none available.
+
+DockingStation        release_bike
+Bike                  
