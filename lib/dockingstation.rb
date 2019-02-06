@@ -9,11 +9,22 @@ class DockingStation
     end
 
     def release_bike
+      fail 'No bikes left' if empty?
         bike = @bikes.pop
-        if bike != nil then bike else raise 'There are no bikes left' end
     end
 
     def return_bike(bike)
-      if @bikes.length < @capacity then @bikes << bike else raise "The station is full" end
+      fail 'Docking Station is full' if full?
+      @bikes << bike
     end
+
+    def full?
+      @bikes.count >= @capacity
+    end
+
+    def empty?
+      @bikes.count == 0
+    end
+
+    private :full?, :empty?
 end

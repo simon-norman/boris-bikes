@@ -27,11 +27,11 @@ describe DockingStation do
   it "raises exception on release_bike when no more bikes left" do
     20.times { @dockingstation.release_bike }
 
-    expect { @dockingstation.release_bike }.to raise_error
+    expect { @dockingstation.release_bike }.to raise_error('No bikes left')
   end
 
   it "raises exception on return bike and station being full" do
-    expect { @dockingstation.return_bike(Bike.new) }.to raise_error
+    expect { @dockingstation.return_bike(Bike.new) }.to raise_error('Docking Station is full')
   end
 
   it "initially contains 20 bikes (on creation)" do
