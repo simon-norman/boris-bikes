@@ -3,7 +3,7 @@ require './lib/dockingstation.rb'
 
 describe DockingStation do
   before(:all) do
-    @bikes_capacity = DockingStation::DEFAULT_CAPACITY
+    @bikes_capacity = DockingStation.new.capacity
   end
 
   before(:each) do
@@ -40,5 +40,9 @@ describe DockingStation do
 
   it "initially contains #{@bikes_capacity} bikes (on creation)" do
     expect(@dockingstation.bikes.length).to eq(@bikes_capacity)
+  end
+
+  it "Station has a default capacity of 20" do
+    expect(@dockingstation.bikes.count).to eq(20)
   end
 end
