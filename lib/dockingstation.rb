@@ -12,6 +12,7 @@ class DockingStation
         if bike != nil then bike else raise 'There are no bikes left' end
     end
 
-    def return_bike
+    def return_bike(bike)
+      if @bikes.length < 3 then @bikes << bike else raise "The station is full" end
     end
 end

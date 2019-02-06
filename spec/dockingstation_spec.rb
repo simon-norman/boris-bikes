@@ -20,7 +20,7 @@ describe DockingStation do
 
   it "can show the bikes in dock" do
     dockingstation = DockingStation.new
-    
+
     dockingstation.bikes.each do |bike|
       expect(bike.class).to eq Bike
     end
@@ -30,7 +30,13 @@ describe DockingStation do
     dockingstation = DockingStation.new
 
     3.times { dockingstation.release_bike }
-    
+
     expect { dockingstation.release_bike }.to raise_error
+  end
+
+  it "raises exception on return bike and station being full" do
+    dockingstation = DockingStation.new
+
+    expect { dockingstation.return_bike(Bike.new) }.to raise_error
   end
 end
